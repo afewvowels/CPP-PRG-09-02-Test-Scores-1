@@ -37,6 +37,8 @@ int main()
         cout << *(dblTestScores + i) << endl;
     }
     
+    cout << endl << endl;
+    
     dblTestScores = sortScores(dblTestScores, intNumScores);
     
     for (int i = 0 ; i < intNumScores ; i++)
@@ -96,6 +98,7 @@ double *sortScores(double *dblScores, int INT_SCORES)
     int intStartScan;
     
     double *dblMinElement = nullptr;
+    double *dblTemp = nullptr;
 //    double *dblNewArr = nullptr;
 //
 //    dblNewArr = new double[INT_SCORES];
@@ -113,18 +116,21 @@ double *sortScores(double *dblScores, int INT_SCORES)
     for(intStartScan = 0 ; intStartScan < (INT_SCORES - 1) ; intStartScan++)
     {
         intMinIndex = intStartScan;
-        dblMinElement = dblScores[intStartScan];
+        dblMinElement = &dblScores[intStartScan];
 
         for(int index = intStartScan + 1 ; index < INT_SCORES ; index++)
         {
-            if(*dblScores[index] < *dblMinElement)
+            if(dblScores[index] < *dblMinElement)
             {
-                dblMinElement = dblScores[index];
+                dblMinElement = &dblScores[index];
                 intMinIndex = index;
             }
         }
+        
+        *dblTemp = dblScores[intMinIndex];
         dblScores[intMinIndex] = dblScores[intStartScan];
-        dblScores[intStartScan] = dblMinElement;
+//        dblScores[intStartScan] = *dblMinElement;
+        dblScores[intStartScan] = *dblTemp;
     }
     
     return dblScores;
