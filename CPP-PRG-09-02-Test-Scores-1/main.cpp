@@ -14,6 +14,7 @@
 //  Input Validation: Do not accept negative numbers for test scores.
 
 #include <iostream>
+#include <iomanip>
 
 using namespace std;
 
@@ -21,6 +22,8 @@ void getNumberOfTestScores(int &);
 double *getTestScores(int);
 double *sortScores(double *, int);
 void swap(double *, double *);
+double averageTestScore(double *, int);
+void showOutputMessage(double *, int, double);
 
 
 int main()
@@ -28,24 +31,31 @@ int main()
     int intNumScores;
     
     double *dblTestScores = nullptr;
+    double dblAverageScore;
     
     getNumberOfTestScores(intNumScores);
     
     dblTestScores = getTestScores(intNumScores);
-    
-    for (int i = 0 ; i < intNumScores ; i++)
-    {
-        cout << *(dblTestScores + i) << endl;
-    }
+
+//    Debug
+//    for (int i = 0 ; i < intNumScores ; i++)
+//    {
+//        cout << *(dblTestScores + i) << endl;
+//    }
     
     cout << endl << endl;
     
     dblTestScores = sortScores(dblTestScores, intNumScores);
+
+//    Debug
+//    for (int i = 0 ; i < intNumScores ; i++)
+//    {
+//        cout << *(dblTestScores + i) << endl;
+//    }
     
-    for (int i = 0 ; i < intNumScores ; i++)
-    {
-        cout << *(dblTestScores + i) << endl;
-    }
+    dblAverageScore = averageTestScore(dblTestScores, intNumScores);
+    
+    showOutputMessage(dblTestScores, intNumScores, dblAverageScore);
     
     return 0;
 }
@@ -126,4 +136,30 @@ void swap(double *dblA, double *dblB)
     temp = dblA;
     dblA = dblB;
     dblB = temp;
+}
+
+double averageTestScore(double *dblScores, int INT_SCORES)
+{
+    double dblTotal = 0;
+    double dblAverage;
+    
+    for(int i = 0 ; i < INT_SCORES ; i++)
+    {
+        dblTotal += *(dblScores + i);
+    }
+    
+    dblAverage = dblTotal / INT_SCORES;
+    
+    return dblAverage;
+}
+
+void showOutputMessage(double *dblScores, int INT_SCORES, double dblAverage)
+{
+    cout << setprecision(1) << fixed << showpoint;
+    cout << "Your test scores sorted in order are:\n";
+    for(int i = 0 ; i < INT_SCORES ; i++)
+    {
+        cout << *(dblScores + i) << endl;
+    }
+    cout << "Your average score was " << dblAverage << endl;
 }
