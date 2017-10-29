@@ -99,7 +99,6 @@ double *sortScores(double *dblScores, int INT_SCORES)
     int intStartScan;
     
     double *dblMinElement = nullptr;
-    double *dblTemp = nullptr;
     
     for(intStartScan = 0 ; intStartScan < (INT_SCORES - 1) ; intStartScan++)
     {
