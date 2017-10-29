@@ -20,6 +20,7 @@ using namespace std;
 void getNumberOfTestScores(int &);
 double *getTestScores(int);
 double *sortScores(double *, int);
+void swap(double *, double *);
 
 
 int main()
@@ -99,19 +100,6 @@ double *sortScores(double *dblScores, int INT_SCORES)
     
     double *dblMinElement = nullptr;
     double *dblTemp = nullptr;
-//    double *dblNewArr = nullptr;
-//
-//    dblNewArr = new double[INT_SCORES];
-//
-//    for(int i = 0 ; i < INT_SCORES ; i++)
-//    {
-//        dblNewArr[i] = dblScores[i];
-//    }
-    
-//    for (int i = 0 ; i < INT_SCORES ; i++)
-//    {
-//        cout << *(dblNewArr + i) << endl;
-//    }
     
     for(intStartScan = 0 ; intStartScan < (INT_SCORES - 1) ; intStartScan++)
     {
@@ -126,12 +114,17 @@ double *sortScores(double *dblScores, int INT_SCORES)
                 intMinIndex = index;
             }
         }
-        
-        *dblTemp = dblScores[intMinIndex];
-        dblScores[intMinIndex] = dblScores[intStartScan];
-//        dblScores[intStartScan] = *dblMinElement;
-        dblScores[intStartScan] = *dblTemp;
+        swap(dblScores[intMinIndex], dblScores[intStartScan]);
     }
     
     return dblScores;
+}
+
+void swap(double *dblA, double *dblB)
+{
+    double *temp = nullptr;
+    
+    temp = dblA;
+    dblA = dblB;
+    dblB = temp;
 }
