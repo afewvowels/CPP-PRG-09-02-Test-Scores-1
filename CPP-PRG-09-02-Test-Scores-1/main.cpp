@@ -18,7 +18,7 @@
 
 using namespace std;
 
-void getNumberOfTestScores(int &);
+int *getNumberOfTestScores();
 double *getTestScores(int);
 double *sortScores(double *, int);
 void swap(double *, double *);
@@ -28,14 +28,14 @@ void showOutputMessage(double *, int, double);
 
 int main()
 {
-    int intNumScores;
+    int *intNumScores = nullptr;
     
     double *dblTestScores = nullptr;
     double dblAverageScore;
     
-    getNumberOfTestScores(intNumScores);
+    intNumScores = getNumberOfTestScores();
     
-    dblTestScores = getTestScores(intNumScores);
+    dblTestScores = getTestScores(*intNumScores);
 
 //    Debug
 //    for (int i = 0 ; i < intNumScores ; i++)
@@ -45,7 +45,7 @@ int main()
     
     cout << endl << endl;
     
-    dblTestScores = sortScores(dblTestScores, intNumScores);
+    dblTestScores = sortScores(dblTestScores, *intNumScores);
 
 //    Debug
 //    for (int i = 0 ; i < intNumScores ; i++)
@@ -53,26 +53,30 @@ int main()
 //        cout << *(dblTestScores + i) << endl;
 //    }
     
-    dblAverageScore = averageTestScore(dblTestScores, intNumScores);
+    dblAverageScore = averageTestScore(dblTestScores, *intNumScores);
     
-    showOutputMessage(dblTestScores, intNumScores, dblAverageScore);
+    showOutputMessage(dblTestScores, *intNumScores, dblAverageScore);
     
     return 0;
 }
 
-void getNumberOfTestScores(int &refNumScores)
+int *getNumberOfTestScores()
 {
-//    int intNumScores;
+    int *intNumScores = nullptr;
+    
+    intNumScores = new int;
     
     cout << "How many test scores would you like to average?\n";
-    cin >> refNumScores;
-    while(!cin || refNumScores <= 0 || refNumScores > 10)
+    cin >> *intNumScores;
+    while(!cin || *intNumScores <= 0 || *intNumScores > 10)
     {
         cout << "Please enter a number between 1 and 10.\n";
         cin.clear();
         cin.ignore();
-        cin >> refNumScores;
+        cin >> *intNumScores;
     }
+    
+    return intNumScores;
 }
 
 double *getTestScores(int intScores)
