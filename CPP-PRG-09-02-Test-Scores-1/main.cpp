@@ -149,7 +149,7 @@ double *sortScores(double *dblScores, int *INT_SCORES)
     // Loop through the array one element at a time
     for(intStartScan = 0 ; intStartScan < (*INT_SCORES - 1) ; intStartScan++)
     {
-        // Set min index (first element in subscan to startscan
+        // Set min index (first element) in subscan to startscan
         intMinIndex = intStartScan;
         // Set the pointer equal to the memory location of that
         // array element
